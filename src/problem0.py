@@ -10,7 +10,7 @@ These problems illustrate concepts that previous problems have not emphasized:
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
          their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 import testing_helper
@@ -25,7 +25,7 @@ def main():
 
 
 ###############################################################################
-# TODO: 2.  READ the green doc-string for the:
+# DONE: 2.  READ the green doc-string for the:
 #   - is_prime
 #   - sum_of_digits
 # functions defined below.  You do NOT need to understand their
@@ -189,7 +189,7 @@ def problem0a(n):
            since (2 + 4 + 6) is 12, which is NOT odd.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -206,8 +206,12 @@ def problem0a(n):
     #        Simply try a few examples to convince yourself of this.
     #        ASK FOR HELP if you do not understand this hint.
     # -------------------------------------------------------------------------
-
-
+    # sum = sum_of_digits(n)
+    # if sum % 2 == 0:
+    #     return False
+    # else:
+    #     return True
+    return sum_of_digits(n) % 2 == 1
 def run_test_problem0b():
     """ Tests the   problem0b   function. """
     print()
@@ -262,7 +266,7 @@ def problem0b(n):
            since there are 46 primes between 2 and 200.
      """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -271,7 +275,12 @@ def problem0b(n):
     #    **  use (call) the   is_prime   function that is DEFINED ABOVE.
     ###########################################################################
     # ------------------------------------------------------------------
+    count = 0
+    for k in range(n-1):
+        if is_prime(k + 2):
+            count += 1
 
+    return count
 
 def run_test_problem0c():
     """ Tests the   problem0c  function. """
@@ -330,7 +339,7 @@ def problem0c(circle, n, window):
       :type window: rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -338,8 +347,16 @@ def problem0c(circle, n, window):
     #   renders with a half-second pause after rendering.
     ###########################################################################
     # -------------------------------------------------------------------------
+    circle.attach_to(window)
+    x_val = circle.center.x + (circle.radius * 2)
+    for _ in range(n):
+        new_circle = rg.Circle(rg.Point(x_val,circle.center.y),circle.radius)
+        new_circle.attach_to(window)
+        x_val = x_val + (circle.radius*2)
+        window.render(0.5)
 
 
+    window.render()
 ###############################################################################
 # Our tests use the following to print error messages in red.
 # Do NOT change it.  You do NOT have to do anything with it.
