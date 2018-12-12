@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 3.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
-         their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues, and Zachary Juday.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -147,6 +147,21 @@ def problem3a(window, point, n):
     #    TIME ESTIMATE:   20 to 35 minutes.
     # -------------------------------------------------------------------------
 
+    tot = 0
+    for k in range(n):
+        p1 = rg.Point(point.x+(20*k),point.y+(10*k))
+        p2 = rg.Point(p1.x,p1.y+50)
+        line = rg.Line(p1,p2)
+        if 1+(2*k) <= 13:
+            line.thickness = 1+(2*k)
+        else:
+            line.thickness = 13
+        tot = tot + line.thickness
+        line.attach_to(window)
+    window.render()
+    return tot
+
+
 
 def run_test_problem3b():
     """ Tests the   problem3b   function. """
@@ -215,6 +230,15 @@ def problem3b(m, point1):
     #    DIFFICULTY:      8 or 9
     #    TIME ESTIMATE:   20 to 30 minutes.
     # -------------------------------------------------------------------------
+
+    t=0
+    win = rg.RoseWindow(450,650)
+    for k in range(1,m+1):
+        p2 = rg.Point(point1.x,point1.y+(60*k))
+        t = t + problem3a(win,p2,1+(2*k))
+    win.render()
+    win.close_on_mouse_click()
+    return t
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

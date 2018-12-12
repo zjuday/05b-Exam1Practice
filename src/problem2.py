@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 2.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
-         their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues, and Zachary Juday.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -103,7 +103,7 @@ def problem2a(circle, rectangle, window):
       :type window:    rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -111,6 +111,25 @@ def problem2a(circle, rectangle, window):
     #    DIFFICULTY:      6
     #    TIME ESTIMATE:   10 to 15 minutes.
     # -------------------------------------------------------------------------
+
+    win1 = window
+    cir1 = circle
+    rec1 = rectangle
+    cir1.attach_to(win1)
+    rec1.attach_to(win1)
+    win1.render()
+    win1.continue_on_mouse_click()
+    p1 = rec1.get_upper_right_corner()
+    p2 = rec1.get_lower_left_corner()
+    line = rg.Line(p1,p2)
+    line.arrow = 'last'
+    line.attach_to(win1)
+    win1.render()
+    win1.continue_on_mouse_click()
+    color = rec1.outline_color
+    circle.fill_color = color
+    win1.render()
+
 
 def run_test_problem2b():
     """ Tests the  problem2b   function. """
@@ -182,7 +201,14 @@ def problem2b(rect, n, delta, win):
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 to 25 minutes.
     # -------------------------------------------------------------------------
-
+    rec1 = rect
+    rec1.attach_to(win)
+    for k in range(n-1):
+        c1 = rg.Point((rec1.get_center().x - (rec1.get_width()/2 +delta*(k+1))), (rec1.get_center().y - (rec1.get_height()/2 + delta*(k+1))))
+        c2 = rg.Point((rec1.get_center().x + (rec1.get_width()/2 +delta*(k+1))), (rec1.get_center().y + (rec1.get_height()/2 + delta*(k+1))))
+        rec2 = rg.Rectangle(c1,c2)
+        rec2.attach_to(win)
+    win.render()
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
